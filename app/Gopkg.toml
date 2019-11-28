@@ -1,0 +1,10 @@
+# Refer to https://github.com/golang/dep/blob/master/docs/Gopkg.toml.md
+# for detailed documentation.
+
+[[constraint]]
+  name = "github.com/gorilla/mux"
+  version = "1.6.1"
+
+[prune]
+  go-tests = true
+  unused-packages = true
