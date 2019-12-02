@@ -51,6 +51,6 @@ RUN apk --no-cache add ca-certificates
 
 # Todo
 
-[X] Add the dockerfile templating tool
-[X] Get the image to build successfully
-[X] Launch a working hello world container
+- [X] Add the dockerfile templating tool
+- [X] Get the image to build successfully
+- [X] Launch a working hello world container
