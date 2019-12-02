@@ -1,16 +1,17 @@
 # Multi-stage build setup (https://docs.docker.com/develop/develop-images/multistage-build/)
 
-# Stage 1: Create the build image (~850MB)
+# Stage 1: Create the build image (~977MB)
 
 FROM golang:1.10.1 AS builder
 RUN go version
 
 # install python for scripting
-RUN apt-get update \
-	apt-get install python3 \
-	apt-get install python3-pip
+RUN apt-get update
+RUN apt-get -y install \
+	python3 \
+	python3-pip
 
-COPY app/* /go/src/{{app_name}}/
+COPY src/ /go/src/{{app_name}}/
 WORKDIR /go/src/{{app_name}}
 
 RUN set -x && \
@@ -19,11 +20,11 @@ RUN set -x && \
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o {{app_name}} .
 
-# Stage 2: Create the minimal executable image (~7MB)
+# Stage 2: Create the minimal executable image (~7.1MB)
 
 FROM scratch
-WORDIR /root/
+WORKDIR /root/
 COPY --from=builder /go/src/{{app_name}}/{{app_name}} .
 
 EXPOSE {{port}}
-ENTRYPOINT ["./{{app_name}}"]
+ENTRYPOINT ["./{{app_name}}","{{port}}"]
