@@ -32,11 +32,10 @@ The only requirement for this running this example is that docker is installed.
 
 # Explanation
 
-The code is written on the local system then copied into the docker builder.  
-The builder is then , but the docker image is used to compile then run the code.  
+*Two-stage build.* The code is written on the local system then copied into the docker builder.  The builder is a full golang docker image that is used to compile the code.  The builder image is then discarded and the compiled binaries are placed into a minimal image (called scratch).
 
-In order to facilitate the quick deployment of the app, I wrote a shell script for convenience to handle some of the messy internal workings.
-The internal configuration (specifically the internal port number, image name, and image tag) are all configured within the app script.
+*shell script.* In order to facilitate the quick deployment of the app, I wrote a shell script for convenience to handle some of the messy internal workings.
+The internal configuration (specifically the container internal port number, image name, and image tag) are all configured within the app script.
 
 # Tricks
 
