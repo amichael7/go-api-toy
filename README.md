@@ -1,4 +1,4 @@
-# Example: Simple Go API in a Docker container
+# Go Toy API: Simple Golang API Example in a Docker container
 
 A template project to create a Docker image for a Go application.
 The example application exposes an HTTP endpoint and 
